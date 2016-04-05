@@ -3,7 +3,7 @@
 {space15}
 
 {foreach from=$sections item=s}
-	<h2>{str_replace("//", "", $s["title"])|upper}</h3>
+	<h2>{str_replace("//", "", $s["title"])|upper}</h2>
 		<ul>
 			{foreach from=$s["articles"] item=a}
 				<li>
@@ -17,5 +17,5 @@
 			{/foreach}
 		</ul>
 	</li>
-	{space15}
+	{space10}
 {/foreach}
