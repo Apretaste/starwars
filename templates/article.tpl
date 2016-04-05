@@ -1,6 +1,5 @@
-<h1>latino.StarWars.com</h1>
-<h2>{$article["title"]}</h2>
-<small>{$article["date"]}</small>
+<h1>{$article["title"]}</h1>
+<small><font color="grey">{$article["date"]}</font></small>
 
 {space15}
 
@@ -9,3 +8,9 @@
 		<p>{$p}</p>
 	{/foreach}
 </div>
+
+{space15}
+
+<center>
+	{button href="STARWARS" caption="Otras noticias"}
+</center>

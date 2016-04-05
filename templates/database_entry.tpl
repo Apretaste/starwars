@@ -1,5 +1,4 @@
-<h1>latino.StarWars.com</h1>
-<h2>{$entry["name"]}</h2>
+<h1>{$entry["name"]}</h1>
 <p>{$entry["description"]}</p>
 
 {space15}
@@ -18,3 +17,9 @@
 		</dd>
 	{/foreach}
 </dl>
+
+{space15}
+
+<center>
+	{button href="STARWARS" caption="Otros t&iacute;tulos"}
+</center>

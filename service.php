@@ -14,24 +14,24 @@ class StarWars extends Service
 	{
 		$article_url = $request->query;
 
-		if (empty($article_url)) {
+		if (empty($article_url))
+		{
 			$starWarsSections = $this->starWarsContentSections();
-	
-			$subject = "latino.StarWars.com: Página principal";
+			$subject = "Noticias de Star Wars";
 			$template_name = "home.tpl";
 			$template_variables = array("sections" => $starWarsSections);
 		}
-		elseif (strpos($article_url, "/banco-de-datos/") === false) {
+		elseif (strpos($article_url, "/banco-de-datos/") === false)
+		{
 			$article = $this->starWarsArticleContent($article_url);
-
-			$subject = "latino.StarWars.com: " . $article["title"];
+			$subject = "Star Wars: " . $article["title"];
 			$template_name = "article.tpl";
 			$template_variables = array("article" => $article);
 		}
-		else {
+		else
+		{
 			$entry = $this->starWarsDatabaseContent($article_url);
-
-			$subject = "latino.StarWars.com: " . $entry["name"];
+			$subject = "Star Wars: " . $entry["name"];
 			$template_name = "database_entry.tpl";
 			$template_variables = array("entry" => $entry);
 		}
