@@ -1,6 +1,6 @@
 <service>
 	<serviceName>starwars</serviceName>
-	<serviceDescription><![CDATA[Ense&ntilde;a las &uacute;ltimas noticias de Star Wars]]></serviceDescription>
+	<serviceDescription>Ensena las ultimas noticias del mundo de Star Wars</serviceDescription>
 	<creatorEmail>khalifenizar@gmail.com</creatorEmail>
 	<serviceCategory>ocio</serviceCategory>
 	<serviceUsage>
