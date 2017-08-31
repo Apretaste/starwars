@@ -6,50 +6,50 @@ class StarWars extends Service
 {
 	/**
 	 * Function executed when the service is called
-	 * 
+	 *
 	 * @param Request
 	 * @return Response
-	 * */
+	 */
 	public function _main(Request $request)
 	{
-		$article_url = $request->query;
-
-		if (empty($article_url))
+		$response = new Response();
+		if (empty($request->query))
 		{
+			$response->setCache("day");
 			$starWarsSections = $this->starWarsContentSections();
 			$subject = "Noticias de Star Wars";
 			$template_name = "home.tpl";
 			$template_variables = array("sections" => $starWarsSections);
 		}
-		elseif (strpos($article_url, "/banco-de-datos/") === false)
+		elseif (strpos($request->query, "/banco-de-datos/") === false)
 		{
-			$article = $this->starWarsArticleContent($article_url);
+			$response->setCache();
+			$article = $this->starWarsArticleContent($request->query);
 			$subject = "Star Wars: " . $article["title"];
 			$template_name = "article.tpl";
 			$template_variables = array("article" => $article);
 		}
 		else
 		{
-			$entry = $this->starWarsDatabaseContent($article_url);
+			$response->setCache();
+			$entry = $this->starWarsDatabaseContent($request->query);
 			$subject = "Star Wars: " . $entry["name"];
 			$template_name = "database_entry.tpl";
 			$template_variables = array("entry" => $entry);
 		}
 
-		$response = new Response();
 		$response->setResponseSubject($subject);
 		$response->createFromTemplate($template_name, $template_variables);
 		return $response;
 	}
 
-
 	protected static $base_url = "http://latino.starwars.com";
 
 	/**
 	 * Crawls http://latino.starwars.com and returns article sections.
-	 * 
+	 *
 	 * @return array[]
-	 * */
+	 */
 	protected function starWarsContentSections() {
 		$crawler = $this->getCrawler();
 
@@ -112,10 +112,10 @@ class StarWars extends Service
 
 	/**
 	 * Returns Apretaste subject for article URL (either WEB service or internal).
-	 * 
+	 *
 	 * @param string
 	 * @return string
-	 * */
+	 */
 	protected function getArticleUrl ($url) {
 		$prefix = self::$base_url;
 
