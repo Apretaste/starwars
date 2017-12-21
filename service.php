@@ -1,9 +1,11 @@
 <?php
 
 use Goutte\Client;
+use GuzzleHttp\Client as GuzzleClient;
 
 class StarWars extends Service
 {
+	public $client = null;
 	/**
 	 * Function executed when the service is called
 	 *
@@ -175,14 +177,34 @@ class StarWars extends Service
 	}
 
 
-	protected function getCrawler ($url = "") {
-		$client = new Client();
-		$guzzle = $client->getClient();
-		$guzzle->setDefaultOption("verify", false);
-		$client->setClient($guzzle);
+	/**
+	 * Crawler client
+	 *
+	 * @return \Goutte\Client
+	 */
+	public function getClient()
+	{
+		if (is_null($this->client))
+		{
+			$this->client = new Client();
+			$guzzle = new GuzzleClient(["verify" => false]);
+			$this->client->setClient($guzzle);
+		}
+		return $this->client;
+	}
 
-		// create a crawler
-		$crawler = $client->request("GET", self::$base_url . $url);
+	/**
+	 * Get crawler for URL
+	 * 
+	 * @param string $url
+	 *
+	 * @return \Symfony\Component\DomCrawler\Crawler
+	 */
+	protected function getCrawler ($url = "") {
+		$url = trim($url);
+		if ($url[0] == '/') $url = substr($url, 1);
+
+		$crawler = $this->getClient()->request("GET", self::$base_url . "/$url");
 
 		return $crawler;
 	}
