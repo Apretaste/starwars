@@ -202,7 +202,7 @@ class StarWars extends Service
 	 */
 	protected function getCrawler ($url = "") {
 		$url = trim($url);
-		if ($url[0] == '/') $url = substr($url, 1);
+		if ($url != '' && $url[0] == '/') $url = substr($url, 1);
 
 		$crawler = $this->getClient()->request("GET", self::$base_url . "/$url");
 
