@@ -133,8 +133,12 @@ class StarWars extends Service
 
 	protected function starWarsArticleContent ($url) {
 		$crawler = $this->getCrawler($url);
+        $node = $crawler->filter(".article-date");
 
-		$category_and_date = explode(" // ", $crawler->filter(".article-date")->text());
+        $category_and_date = ["", ""];
+        if ($node->count()>0)
+		    $category_and_date = explode(" // ", $node->text());
+
 		$content = array();
 
 		$crawler->filter(".entry-content p")->each(function ($p) use (&$content) {
