@@ -145,8 +145,11 @@ class StarWars extends Service
 			$content[] = $p->text();
 		});
 
+		$title  = $crawler->filter(".entry-title");
+		if ($title->count()>0) $title = $title->text(); else $title ='';
+
 		return array(
-			"title" => $crawler->filter(".entry-title")->text(),
+			"title" => $title,
 			"content" => $content,
 			"category" => $category_and_date[0],
 			"date" => $category_and_date[1]
